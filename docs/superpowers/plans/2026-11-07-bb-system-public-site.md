@@ -366,7 +366,7 @@ Via the Railway MCP: new project `bb-system-public` in the same workspace as the
 
 - [ ] **Step 3: Add the custom domains**
 
-Via Railway MCP: add custom domains `bbgym.app` and `www.bbgym.app` to the service; note the CNAME target each returns. Via Cloudflare MCP: in zone `bbgym.app`, create `CNAME @ → <railway target>` and `CNAME www → <railway target>`, both proxied; set the zone SSL/TLS encryption mode to Full (not Flexible, which loops; not Full strict until Railway's certificate is issued). Add to the `Caddyfile` a block `www.bbgym.app { redir https://bbgym.app{uri} permanent }` is not possible because Caddy sees only `$PORT`; instead add inside the main site block: `@www header Host www.bbgym.app` and `redir @www https://bbgym.app{uri} permanent`.
+Via Railway MCP: add custom domains `bbgym.app` and `www.bbgym.app` to the service; note the CNAME target each returns. Via Cloudflare MCP: in zone `bbgym.app`, create `CNAME @ → <railway target>` and `CNAME www → <railway target>`, both proxied; set the zone SSL/TLS encryption mode to Full (not Flexible, which loops; not Full strict until Railway's certificate is issued). The `www` → apex redirect is already in the `Caddyfile` from Task 6 (Host matcher, since Caddy listens on `$PORT` only).
 
 - [ ] **Step 4: Verify**
 
