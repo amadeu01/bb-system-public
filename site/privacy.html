@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.privacy.title">Privacy policy — bb-system</title>
+<meta name="description" data-i18n-attr="content:meta.privacy.description" content="What bb-system collects, why, who processes it, and how to request access or deletion.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&family=Montserrat:wght@600&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">bb-system</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/" data-i18n="nav.home">Home</a>
+      <a href="/privacy" aria-current="page" data-i18n="nav.privacy">Privacy</a>
+      <a href="/support" data-i18n="nav.support">Support</a>
+      <a href="/terms" data-i18n="nav.terms">Terms</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="pt-BR">PT-BR</button>
+    </div>
+  </div>
+</header>
+<div class="beta-banner">
+  <div class="wrap"><strong>Beta</strong> · <a href="/#beta" data-i18n="banner.beta">bb-system is in beta. Testing is by invitation.</a></div>
+</div>
+
+<main class="wrap legal">
+  <h1 data-i18n="privacy.title">Privacy policy</h1>
+  <p class="updated" data-i18n="privacy.updated">Last updated: 2026-11-07</p>
+  <p data-i18n="privacy.intro">This policy explains what bb-system collects, why, who processes it on our behalf, and what you can ask us to do with it. It is written in plain language; if something is unclear, write to us.</p>
+
+  <section id="who">
+    <h2 data-i18n="privacy.who.title">1. Who we are</h2>
+    <p data-i18n="privacy.who.p1">bb-system is built and operated by ACF Labs. For anything in this policy, contact amadeu01@gmail.com.</p>
+  </section>
+
+  <section id="scope">
+    <h2 data-i18n="privacy.scope.title">2. What this policy covers</h2>
+    <p data-i18n="privacy.scope.p1">It covers the BB Student and BB Coach apps on iOS and Android, the bb-system web console used by coaches and staff, and this website.</p>
+    <p data-i18n="privacy.scope.p2">This website collects nothing and sets no cookies. The only thing it stores in your browser is the language you picked, so the site opens in that language next time. The fonts are loaded from Google Fonts, so your browser sends Google the usual request details (IP address and browser type) to fetch them.</p>
+  </section>
+
+  <section id="data">
+    <h2 data-i18n="privacy.data.title">3. Data we collect</h2>
+    <p data-i18n="privacy.data.p1">We collect only what the coaching relationship needs. By category:</p>
+    <ul>
+      <li data-i18n="privacy.data.account">Account: your name, e-mail address or username, phone number if you use it to sign in, your password (stored only as a hash), and your role (student, coach or staff).</li>
+      <li data-i18n="privacy.data.coaching">Coaching content: the protocols a coach writes for you, covering diet, foods and portions, training plans and supplement instructions.</li>
+      <li data-i18n="privacy.data.records">What the student records: saved workouts with exercises, sets, loads and duration; exercise ticks; meals; and the adherence numbers derived from them.</li>
+      <li data-i18n="privacy.data.checkins">Check-ins: the text and answers you submit and the photos you attach.</li>
+      <li data-i18n="privacy.data.messages">Messages: the chat between a coach and a student.</li>
+      <li data-i18n="privacy.data.health">Health data, only if you allow it: steps, active calories, exercise minutes, resting heart rate and sleep, read from Apple Health (HealthKit) on iOS or from Health Connect on Android. We use it to show your evolution and to share it with your coach. We only read; we never write to Apple Health or Health Connect. It is never used for advertising, never sold, and never shared beyond the processors listed below, who store it for us. You can revoke access at any time in Apple Health or Health Connect, and the app keeps working without it.</li>
+      <li data-i18n="privacy.data.technical">Technical: crash reports and performance traces (device model, OS version, app version, error details); server logs with IP address and request metadata; and an audit log of who did what in the system, under which role.</li>
+    </ul>
+  </section>
+
+  <section id="use">
+    <h2 data-i18n="privacy.use.title">4. How we use it</h2>
+    <p data-i18n="privacy.use.p1">To run the coaching relationship between you and your coach; to show progress over time; to keep the service working and secure; and to send invite codes by e-mail when an account is created.</p>
+    <p data-i18n="privacy.use.p2">We do not show advertising, we do not build profiles for third parties, and we do not sell data.</p>
+  </section>
+
+  <section id="processors">
+    <h2 data-i18n="privacy.processors.title">5. Who processes it for us</h2>
+    <p data-i18n="privacy.processors.p1">These companies handle data on our behalf. Each receives only what its job needs.</p>
+    <ul>
+      <li data-i18n="privacy.processors.railway">Railway: hosts the API, the PostgreSQL database and the Redis session store.</li>
+      <li data-i18n="privacy.processors.cloudinary">Cloudinary: stores uploaded photos.</li>
+      <li data-i18n="privacy.processors.resend">Resend: sends transactional e-mails such as invite codes.</li>
+      <li data-i18n="privacy.processors.datadog">Datadog: receives performance traces and server logs.</li>
+      <li data-i18n="privacy.processors.sentry">Sentry: receives crash and error reports from the apps and the server.</li>
+    </ul>
+  </section>
+
+  <section id="access">
+    <h2 data-i18n="privacy.access.title">6. Who can see it</h2>
+    <p data-i18n="privacy.access.p1">A student's data is visible to the coach or coaches assigned to that student, and to ACF Labs staff with operational access. Staff actions are recorded in the audit log.</p>
+  </section>
+
+  <section id="retention">
+    <h2 data-i18n="privacy.retention.title">7. Retention</h2>
+    <p data-i18n="privacy.retention.p1">We keep your data while your account exists. After a deletion request, we delete or anonymise it, except what the law requires us to keep or what is needed to resolve a dispute.</p>
+    <p data-i18n="privacy.retention.p2">Crash reports, traces and logs expire on the retention schedules of the processors above.</p>
+  </section>
+
+  <section id="rights">
+    <h2 data-i18n="privacy.rights.title">8. Your rights</h2>
+    <p data-i18n="privacy.rights.p1">You can ask to see the data we hold about you, correct it, receive a copy, or have it deleted. Send the request by e-mail to amadeu01@gmail.com from the address on your account, or include your username. We answer within 30 days.</p>
+    <p data-i18n="privacy.rights.p2">If you are in Brazil, these are your rights under the LGPD. If you are in the European Union, they are your rights under the GDPR. Wherever you are, we honour them the same way.</p>
+    <p><a href="/support#delete" data-i18n="privacy.rights.delete">How to delete your account</a> · <a href="/support#export" data-i18n="privacy.rights.export">How to request your data</a></p>
+  </section>
+
+  <section id="children">
+    <h2 data-i18n="privacy.children.title">9. Children</h2>
+    <p data-i18n="privacy.children.p1">bb-system is not meant for people under 18 unless a parent or guardian has agreed to it through the coach.</p>
+  </section>
+
+  <section id="security">
+    <h2 data-i18n="privacy.security.title">10. Security</h2>
+    <p data-i18n="privacy.security.p1">All traffic is encrypted in transit. Passwords are stored as hashes. Sessions use short-lived tokens that can be revoked. Staff with global access sign in with a second step from an authenticator app.</p>
+  </section>
+
+  <section id="changes">
+    <h2 data-i18n="privacy.changes.title">11. Changes</h2>
+    <p data-i18n="privacy.changes.p1">When this policy changes we update the date at the top. If a change matters to you, we describe it here and tell testers by e-mail.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 ACF Labs</span>
+    <a href="mailto:amadeu01@gmail.com">amadeu01@gmail.com</a>
+    <nav aria-label="Legal">
+      <a href="/privacy" data-i18n="footer.privacy">Privacy</a>
+      <a href="/support" data-i18n="footer.support">Support</a>
+      <a href="/terms" data-i18n="footer.terms">Terms</a>
+    </nav>
+    <span class="status" data-i18n="footer.status">Beta</span>
+  </div>
+</footer>
+<script type="module" src="/i18n.js"></script>
+</body>
+</html>

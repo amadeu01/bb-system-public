@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.support.title">Support — bb-system</title>
+<meta name="description" data-i18n-attr="content:meta.support.description" content="How to get help with bb-system, report a beta bug, delete your account or request your data.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&family=Montserrat:wght@600&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">bb-system</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/" data-i18n="nav.home">Home</a>
+      <a href="/privacy" data-i18n="nav.privacy">Privacy</a>
+      <a href="/support" aria-current="page" data-i18n="nav.support">Support</a>
+      <a href="/terms" data-i18n="nav.terms">Terms</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="pt-BR">PT-BR</button>
+    </div>
+  </div>
+</header>
+<div class="beta-banner">
+  <div class="wrap"><strong>Beta</strong> · <a href="/#beta" data-i18n="banner.beta">bb-system is in beta. Testing is by invitation.</a></div>
+</div>
+
+<main class="wrap legal">
+  <h1 data-i18n="support.title">Support</h1>
+  <p data-i18n="support.intro">bb-system is in beta, so support is by e-mail and answered by the people building it. Write to amadeu01@gmail.com.</p>
+
+  <section id="help">
+    <h2 data-i18n="support.help.title">Get help</h2>
+    <p data-i18n="support.help.p1">Send an e-mail and tell us which app you use (BB Student, BB Coach or the web console), your device and system version, and what happened. If you can, say what you expected instead.</p>
+    <p><a class="button" href="mailto:amadeu01@gmail.com?subject=bb-system%20support" data-i18n="support.help.cta">E-mail support</a></p>
+  </section>
+
+  <section id="bug">
+    <h2 data-i18n="support.bug.title">Report a bug in the beta</h2>
+    <p data-i18n="support.bug.p1">Bug reports are the most useful thing a tester can send. Include the steps you took, what you saw, and a screenshot or screen recording if you have one. TestFlight's built-in screenshot feedback reaches us too.</p>
+    <p data-i18n="support.bug.p2">If the app lost something you typed, tell us when it happened. The app keeps unsent items in an outbox on your device and retries them, so include whether the outbox showed them as waiting or failed.</p>
+  </section>
+
+  <section id="delete">
+    <h2 data-i18n="support.delete.title">Delete your account</h2>
+    <p data-i18n="support.delete.p1">Send an e-mail from the address on your account, or include your username, with the subject "Delete my account". We confirm by replying, then delete the account within 30 days.</p>
+    <p data-i18n="support.delete.p2">What is deleted: your account, your check-ins and photos, your messages, your saved workouts and meals, and any health readings shared from Apple Health or Health Connect. Your coach keeps nothing personal about you; anonymised numbers may remain in their adherence statistics.</p>
+    <p data-i18n="support.delete.p3">Crash reports and server logs expire on their own schedule, as described in the privacy policy.</p>
+    <p><a class="button" href="mailto:amadeu01@gmail.com?subject=Delete%20my%20account" data-i18n="support.delete.cta">Request account deletion</a></p>
+    <p><a href="/privacy#retention" data-i18n="support.delete.link">Read how long we keep data</a></p>
+  </section>
+
+  <section id="export">
+    <h2 data-i18n="support.export.title">Request your data</h2>
+    <p data-i18n="support.export.p1">Send an e-mail from the address on your account, or include your username, with the subject "Export my data". We reply within 30 days with a copy of what we hold about you in a readable format.</p>
+    <p><a class="button" href="mailto:amadeu01@gmail.com?subject=Export%20my%20data" data-i18n="support.export.cta">Request my data</a></p>
+  </section>
+
+  <section id="status">
+    <h2 data-i18n="support.status.title">Service status</h2>
+    <p data-i18n="support.status.p1">The beta backend may be reset or have downtime while we work on it. Testers are warned by e-mail before a reset. If the app cannot reach the server, what you typed stays on your device and is sent when the connection returns.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 ACF Labs</span>
+    <a href="mailto:amadeu01@gmail.com">amadeu01@gmail.com</a>
+    <nav aria-label="Legal">
+      <a href="/privacy" data-i18n="footer.privacy">Privacy</a>
+      <a href="/support" data-i18n="footer.support">Support</a>
+      <a href="/terms" data-i18n="footer.terms">Terms</a>
+    </nav>
+    <span class="status" data-i18n="footer.status">Beta</span>
+  </div>
+</footer>
+<script type="module" src="/i18n.js"></script>
+</body>
+</html>

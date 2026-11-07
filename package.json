@@ -1,0 +1,9 @@
+{
+  "name": "bb-system-public",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs"
+  }
+}
