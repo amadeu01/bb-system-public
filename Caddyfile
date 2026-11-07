@@ -22,10 +22,10 @@
 		Content-Security-Policy "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; connect-src 'self'; frame-ancestors 'none'"
 		-Server
 	}
-	@html path *.html /
-	header @html Cache-Control "public, max-age=300"
 	@assets path /styles.css /i18n.js /assets/* /i18n/*
 	header @assets Cache-Control "public, max-age=3600"
+	@pages not path /styles.css /i18n.js /assets/* /i18n/*
+	header @pages Cache-Control "public, max-age=300"
 
 	handle_errors {
 		respond "{err.status_code} {err.status_text}" {err.status_code}

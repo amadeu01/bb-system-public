@@ -62,7 +62,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0
 
 /* Header */
 .site-header {
-  position: sticky; top: 0; z-index: 10;
+  position: static; z-index: 10;
   background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
@@ -111,7 +111,10 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0
 
 /* Feature grid */
 .feature-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0 48px; }
-@media (min-width: 48rem) { .feature-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 48rem) {
+  .feature-grid { grid-template-columns: repeat(3, 1fr); }
+  .site-header { position: sticky; top: 0; }
+}
 .card {
   background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px;
 }
@@ -127,8 +130,9 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0
 .legal { max-width: var(--prose); padding: 40px 0 56px; }
 .legal h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.5rem, 8vw, 3.5rem); letter-spacing: 0.02em; }
 .legal .updated { color: var(--muted-fg); font-size: 0.9rem; }
-.legal h2 { margin-top: 2em; scroll-margin-top: 80px; }
-.legal section { scroll-margin-top: 80px; }
+.legal h2 { margin-top: 2em; scroll-margin-top: 16px; }
+.legal section { scroll-margin-top: 16px; }
+@media (min-width: 48rem) { .legal h2, .legal section { scroll-margin-top: 80px; } }
 
 /* Footer */
 .site-footer { border-top: 1px solid var(--border); margin-top: 32px; color: var(--muted-fg); font-size: 0.9rem; }

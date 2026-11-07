@@ -60,3 +60,39 @@ test("applyTranslations leaves English text when the key is missing in the dict"
   applyTranslations(fakeRoot([p]), {}, { "nav.home": "Home" });
   assert.equal(p.textContent, "Home");
 });
+
+// boot(): storage that throws, a navigator in Portuguese, and a hash target that must be re-scrolled after text swaps.
+function fakeDoc(elements, byId) {
+  return {
+    documentElement: { lang: "en" },
+    querySelectorAll: (selector) => {
+      const attr = selector.replace(/[\[\]]/g, "");
+      return elements.filter((e) => e.getAttribute(attr) !== null);
+    },
+    getElementById: (id) => byId[id] || null,
+  };
+}
+function fakeButton(lang) {
+  const el = fakeElement({ "data-lang": lang });
+  el.classList = { toggle(name, on) { el.active = on; } };
+  el.removeAttribute = () => {};
+  el.addEventListener = () => {};
+  return el;
+}
+test("boot survives a throwing localStorage, picks pt-BR from the navigator, and re-scrolls to the hash", async () => {
+  const { boot } = await import("../site/i18n.js");
+  const p = fakeElement({ "data-i18n": "support.delete.title" });
+  p.textContent = "Delete your account";
+  const target = { scrolled: 0, scrollIntoView() { this.scrolled++; } };
+  const doc = fakeDoc([p, fakeButton("en"), fakeButton("pt-BR")], { delete: target });
+  const win = {
+    localStorage: { getItem() { throw new Error("blocked"); }, setItem() { throw new Error("blocked"); } },
+    navigator: { languages: ["pt-BR", "en"] },
+    location: { hash: "#delete" },
+    fetch: async () => ({ ok: true, json: async () => ({ "support.delete.title": "Excluir sua conta" }) }),
+  };
+  await boot(win, doc);
+  assert.equal(doc.documentElement.lang, "pt-BR");
+  assert.equal(p.textContent, "Excluir sua conta");
+  assert.equal(target.scrolled, 1);
+});

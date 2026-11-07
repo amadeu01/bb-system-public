@@ -42,6 +42,19 @@ test("security headers are present", { skip: !base }, async () => {
   assert.equal(h.get("referrer-policy"), "strict-origin-when-cross-origin");
   assert.match(h.get("content-security-policy"), /default-src 'self'/);
 });
+test("clean URLs carry a short Cache-Control, assets a long one", { skip: !base }, async () => {
+  for (const p of ["/", "/privacy", "/support/", "/terms.html"]) {
+    assert.match((await get(p)).headers.get("cache-control") || "", /max-age=300/, p);
+  }
+  assert.match((await get("/styles.css")).headers.get("cache-control") || "", /max-age=3600/);
+});
+test("privacy.html and privacy/ serve the privacy page body", { skip: !base }, async () => {
+  for (const p of ["/privacy.html", "/privacy/", "/privacy"]) {
+    const r = await get(p);
+    assert.equal(r.status, 200, p);
+    assert.match(await r.text(), /data-i18n="privacy.title"/, p);
+  }
+});
 test("i18n JSON is served as json", { skip: !base }, async () => {
   const r = await get("/i18n/pt-BR.json");
   assert.equal(r.status, 200);

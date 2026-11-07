@@ -75,6 +75,12 @@ export async function boot(win, doc) {
   }
   const lang = pickLanguage(readStored(win), win.navigator && win.navigator.languages);
   await render(win, doc, lang, english);
+  // Translated text changes the page height, so the anchor the browser scrolled to may have moved.
+  const hash = win.location && win.location.hash;
+  if (hash && hash.length > 1) {
+    const target = doc.getElementById(decodeURIComponent(hash.slice(1)));
+    if (target && target.scrollIntoView) target.scrollIntoView();
+  }
   for (const btn of doc.querySelectorAll("[data-lang]")) {
     btn.addEventListener("click", () => {
       const chosen = btn.getAttribute("data-lang");
