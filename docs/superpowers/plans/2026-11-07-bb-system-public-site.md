@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** A static four-page site (landing, privacy, support, terms) in en/es/pt-BR, served by Caddy on Railway at `https://bb-system.labs-acf.dev`, satisfying Apple's privacy and support URL requirements.
+**Goal:** A static four-page site (landing, privacy, support, terms) in en/es/pt-BR, served by Caddy on Railway at `https://bbgym.app`, satisfying Apple's privacy and support URL requirements.
 
 **Architecture:** Plain HTML pages under `site/` carry English copy in the markup; a small ES module (`site/i18n.js`) picks the language and swaps text from `site/i18n/<lang>.json` using `data-i18n` attributes. Caddy serves the directory from a Dockerfile; Railway builds and deploys it on push to `main`. A dependency-free Node script keeps the three language files and the HTML keys in sync and runs in GitHub Actions.
 
-**Tech Stack:** HTML, CSS, vanilla JavaScript (ES modules), Node 24 `node:test` for unit tests, Caddy 2 (Docker), Railway, Cloudflare DNS, GitHub Actions.
+**Tech Stack:** HTML, CSS, vanilla JavaScript (ES modules), Node 24 `node:test` for unit tests, Caddy 2 (Docker), Railway, Cloudflare DNS (zone `bbgym.app`), GitHub Actions.
 
 **Spec:** `docs/superpowers/specs/2026-11-07-bb-system-public-site-design.md`
 
@@ -296,6 +296,10 @@ test("privacy.html and privacy/ resolve to the same page", { skip: !base }, asyn
   for (const p of ["/privacy.html", "/privacy/"]) { const r = await get(p); assert.ok([200, 301, 308].includes(r.status), p); }
 });
 test("unknown path is 404", { skip: !base }, async () => assert.equal((await get("/nope")).status, 404));
+test("www redirects to the apex", { skip: !base }, async () => {
+  const r = await fetch(base + "/support", { redirect: "manual", headers: { Host: "www.bbgym.app" } });
+  assert.equal(r.status, 308); assert.equal(r.headers.get("location"), "https://bbgym.app/support");
+});
 test("security headers are present", { skip: !base }, async () => {
   const h = (await get("/")).headers;
   assert.equal(h.get("x-content-type-options"), "nosniff");
@@ -311,6 +315,8 @@ test("i18n JSON is served as json", { skip: !base }, async () => {
 
 ```
 :{$PORT:8080}
+@www header Host www.bbgym.app
+redir @www https://bbgym.app{uri} 308
 root * /srv
 encode gzip
 try_files {path} {path}.html
@@ -358,18 +364,18 @@ Run: `git push -u origin main`. Expected: the GitHub Actions workflow runs green
 
 Via the Railway MCP: new project `bb-system-public` in the same workspace as the existing bb-system project; one service from GitHub repo `amadeu01/bb-system-public`, branch `main`, Dockerfile builder (from `railway.toml`). Wait for the first deployment to succeed. Generate the Railway public domain for the service and run `SITE_URL=https://<service>.up.railway.app npm test` → PASS.
 
-- [ ] **Step 3: Add the custom domain**
+- [ ] **Step 3: Add the custom domains**
 
-Via Railway MCP: add custom domain `bb-system.labs-acf.dev` to the service; note the CNAME target it returns. Via Cloudflare MCP: in zone `labs-acf.dev`, look up how `beta-bb` is set (proxied or DNS only) and create `CNAME bb-system → <railway target>` with the same proxy setting as `beta-bb`; if `beta-bb` does not exist, DNS only.
+Via Railway MCP: add custom domains `bbgym.app` and `www.bbgym.app` to the service; note the CNAME target each returns. Via Cloudflare MCP: in zone `bbgym.app`, create `CNAME @ → <railway target>` and `CNAME www → <railway target>`, both proxied; set the zone SSL/TLS encryption mode to Full (not Flexible, which loops; not Full strict until Railway's certificate is issued). Add to the `Caddyfile` a block `www.bbgym.app { redir https://bbgym.app{uri} permanent }` is not possible because Caddy sees only `$PORT`; instead add inside the main site block: `@www header Host www.bbgym.app` and `redir @www https://bbgym.app{uri} permanent`.
 
 - [ ] **Step 4: Verify**
 
-Run: `until curl -sfI https://bb-system.labs-acf.dev/ >/dev/null; do sleep 20; done; SITE_URL=https://bb-system.labs-acf.dev npm test`
-Expected: PASS. Then `curl -sI https://bb-system.labs-acf.dev/privacy | head -1` → `HTTP/2 200`.
+Run: `until curl -sfI https://bbgym.app/ >/dev/null; do sleep 20; done; SITE_URL=https://bbgym.app npm test`
+Expected: PASS. Then `curl -sI https://bbgym.app/privacy | head -1` → `HTTP/2 200`, and `curl -sI https://www.bbgym.app/support | grep -i location` → `location: https://bbgym.app/support`.
 
 - [ ] **Step 5: Document and commit**
 
-Add a "Deployment" section to `README.md`: Railway project name, that deploys happen on push to `main`, the custom domain and where the DNS record lives, and the three URLs to paste into App Store Connect (marketing `https://bb-system.labs-acf.dev/`, privacy `https://bb-system.labs-acf.dev/privacy`, support `https://bb-system.labs-acf.dev/support`).
+Add a "Deployment" section to `README.md`: Railway project name, that deploys happen on push to `main`, the custom domain and where the DNS record lives, and the three URLs to paste into App Store Connect (marketing `https://bbgym.app/`, privacy `https://bbgym.app/privacy`, support `https://bbgym.app/support`).
 
 ```bash
 git add README.md

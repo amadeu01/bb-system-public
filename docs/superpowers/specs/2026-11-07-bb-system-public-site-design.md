@@ -15,7 +15,7 @@ The product is under development and in alpha/beta testing by invitation. The si
 1. Satisfy Apple's URL requirements: a privacy policy page, a support page that includes how to request account deletion, and a landing page usable as the marketing URL.
 2. Explain bb-system in ten seconds to a reviewer or a prospective tester.
 3. Serve the page in the visitor's browser language (en, es, pt-BR) with buttons to switch.
-4. Deploy on Railway from the GitHub repository `amadeu01/bb-system-public`, reachable at `https://bb-system.labs-acf.dev`.
+4. Deploy on Railway from the GitHub repository `amadeu01/bb-system-public`, reachable at `https://bbgym.app` (with `www.bbgym.app` redirecting to it).
 
 ## Non-goals
 
@@ -35,7 +35,7 @@ The product is under development and in alpha/beta testing by invitation. The si
 - Site languages: detect the browser language; buttons for **en**, **es**, **pt-BR**.
 - Responsible party: **ACF Labs**. Contact: **amadeu01@gmail.com**.
 - Hosting: Railway, new project, linked to `amadeu01/bb-system-public`, alongside the existing bb-system Railway applications.
-- Domain: **bb-system.labs-acf.dev**, DNS on Cloudflare.
+- Domain: **bbgym.app**, registered and served through Cloudflare on 2026-11-07. The site lives on the apex; `www.bbgym.app` redirects to it.
 - Terms governed by the laws of Brazil.
 - Health data comes from Apple Health on iOS and Health Connect on Android; the privacy page covers both.
 
@@ -103,8 +103,8 @@ Short. The service is provided as-is during beta; data may be reset; invitations
 - **Translations.** One `i18n/<lang>.json` per language with the same keys; elements carry `data-i18n="key"`; a small script picks the language (`localStorage` choice, else `navigator.languages` matched to en/es/pt, else en), fills the text, sets `<html lang>`, and highlights the active button. Long legal pages keep their paragraphs as keys too (one key per paragraph) so all three languages live in the same file. Fallback: a missing key shows the English string.
 - **Look.** Tokens copied from the shared design system: dark and light via `prefers-color-scheme`, Bebas Neue for display, Inter for body (Google Fonts), the default tenant accent. Responsive down to 360px, 16px gutters, no horizontal scroll.
 - **Serving.** Caddy in a Dockerfile serving the `site/` directory. `Caddyfile`: listen on `$PORT`, serve files, clean URLs (`/privacy` → `privacy.html`), gzip, `Cache-Control` short for HTML, long for assets, security headers (`X-Content-Type-Options`, `Referrer-Policy`, `Content-Security-Policy` allowing only self and Google Fonts). Health check at `/`.
-- **Railway.** New project `bb-system-public`, one service from the GitHub repo, Dockerfile builder, deploy on push to `main`. `railway.toml` committed with builder and healthcheck. Custom domain `bb-system.labs-acf.dev` added to the service.
-- **Cloudflare.** CNAME `bb-system` on zone `labs-acf.dev` pointing at the Railway-provided target, DNS only (grey cloud) so Railway issues the TLS certificate, unless the zone already proxies the beta API, in which case match it.
+- **Railway.** New project `bb-system-public`, one service from the GitHub repo, Dockerfile builder, deploy on push to `main`. `railway.toml` committed with builder and healthcheck. Custom domains `bbgym.app` and `www.bbgym.app` added to the service; Caddy redirects `www` to the apex.
+- **Cloudflare.** Zone `bbgym.app`: CNAME `@` (apex, Cloudflare flattens it) and CNAME `www`, both pointing at the Railway-provided target. Proxied (orange cloud) with SSL/TLS mode **Full**, which is what Railway documents for Cloudflare. `.app` is an HSTS-preloaded TLD, so the site is HTTPS-only by construction.
 - **Repository layout.**
   ```
   site/            index.html, privacy.html, support.html, terms.html, styles.css, app.js, i18n/{en,es,pt-BR}.json, assets/
