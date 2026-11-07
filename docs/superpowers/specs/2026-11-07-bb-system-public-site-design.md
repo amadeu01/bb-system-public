@@ -36,6 +36,7 @@ The product is under development and in alpha/beta testing by invitation. The si
 - Responsible party: **ACF Labs**. Contact: **amadeu01@gmail.com**.
 - Hosting: Railway, new project, linked to `amadeu01/bb-system-public`, alongside the existing bb-system Railway applications.
 - Domain: **bb-system.labs-acf.dev**, DNS on Cloudflare.
+- Terms governed by the laws of Brazil.
 
 ## Content
 
@@ -46,7 +47,7 @@ Four pages, one header, one footer. Source language for copy is English; es and 
 - Brand "bb-system", nav links: Home, Privacy, Support, Terms.
 - Language switch: three buttons (EN, ES, PT-BR). Current language highlighted.
 - Beta banner under the header: "bb-system is in beta. Testing is by invitation." with a link to the beta section of the landing page.
-- Footer: "ACF Labs", contact e-mail, links to Privacy, Support, Terms, and "Backend API: beta". Year.
+- Footer: "ACF Labs", contact e-mail, links to Privacy, Support, Terms, and a plain-text status label "Beta" (no link to the API host). Year.
 
 ### Landing page `/`
 
@@ -61,6 +62,8 @@ Four pages, one header, one footer. Source language for copy is English; es and 
 ### Privacy policy `/privacy`
 
 Plain language, sections in this order. Last-updated date at the top.
+
+The facts below were checked on 2026-11-07 against the backend repo `amadeu01/bb-gym-system` (`CONTEXT.md`, `docs-for-humans/getting-started/environment.md`: Cloudinary, Resend, Datadog, Sentry, Redis, Postgres, audit log, superuser second step, student phone sign-in, invite codes by e-mail) and the iOS repo `project.yml` (HealthKit usage description: steps, active calories, exercise minutes, resting heart rate, sleep, "share it with your coach"). The builder writes copy from this document and does not need the backend repo. Account deletion and data export within 30 days are a manual commitment by ACF Labs, done by e-mail request, not an app feature. App Store privacy labels do not exist yet; they will be filled in from this page.
 
 1. **Who we are.** ACF Labs; contact e-mail.
 2. **What this policy covers.** The BB Student and BB Coach apps (iOS and Android), the web console, and this website. The website itself collects nothing and sets no cookies; it stores the chosen language in the browser only.
@@ -91,7 +94,7 @@ Plain language, sections in this order. Last-updated date at the top.
 
 ### Terms for beta testers `/terms`
 
-Short. The service is provided as-is during beta; data may be reset; invitations may be revoked; not medical advice, protocols come from the coach; acceptable use (no abuse, no uploading others' data); governing contact. Last-updated date.
+Short. The service is provided as-is during beta; data may be reset; invitations may be revoked; not medical advice, protocols come from the coach; acceptable use (no abuse, no uploading others' data); governed by the laws of Brazil (decided by Amadeu); contact e-mail for questions. Last-updated date.
 
 ## Build (my calls, marked as mine)
 
