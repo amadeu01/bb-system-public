@@ -37,6 +37,7 @@ The product is under development and in alpha/beta testing by invitation. The si
 - Hosting: Railway, new project, linked to `amadeu01/bb-system-public`, alongside the existing bb-system Railway applications.
 - Domain: **bb-system.labs-acf.dev**, DNS on Cloudflare.
 - Terms governed by the laws of Brazil.
+- Health data comes from Apple Health on iOS and Health Connect on Android; the privacy page covers both.
 
 ## Content
 
@@ -73,7 +74,7 @@ The facts below were checked on 2026-11-07 against the backend repo `amadeu01/bb
    - What the student records: saved workouts (exercises, sets, loads, duration), exercise ticks, meals, adherence.
    - Check-ins: text, answers, and photos.
    - Messages: chat between coach and student.
-   - Health data (iOS, optional, only with permission): steps, active calories, exercise minutes, resting heart rate, sleep, read from Apple Health to show evolution and share it with the coach. Never used for advertising, never sold, never shared with third parties beyond the processors below for storage.
+   - Health data (optional, only with permission, both platforms): steps, active calories, exercise minutes, resting heart rate, sleep, read from Apple Health (HealthKit) on iOS and from Health Connect on Android, to show evolution and share it with the coach. Read only, never written back. Never used for advertising, never sold, never shared with third parties beyond the processors below for storage. The user can revoke access in Apple Health or Health Connect at any time and the app keeps working without it. This section is written to satisfy both Apple's HealthKit rules and Google Play's Health Connect policy, which requires the privacy policy to name each health data type and its purpose.
    - Technical: crash reports and performance traces (device model, OS version, app version, error details); server logs with IP address and request metadata; an audit log of who did what in the system.
 4. **How we use it.** To run the coaching relationship; to show progress; to keep the service working and secure; to send invite codes by e-mail. No advertising, no profiling, no sale of data.
 5. **Who processes it for us.** Railway (hosting, PostgreSQL database, Redis), Cloudinary (photo storage), Resend (transactional e-mail), Datadog and Sentry (errors and performance). Each receives only what it needs.
