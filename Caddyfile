@@ -1,0 +1,34 @@
+{
+	admin off
+	auto_https off
+}
+
+:{$PORT:8080} {
+	root * /srv
+	encode gzip
+
+	# www -> apex (TLS and the public hostname are terminated by Railway/Cloudflare)
+	@www header Host www.bbgym.app
+	redir @www https://bbgym.app{uri} 308
+
+	# Clean URLs: /privacy -> privacy.html, /privacy/ -> privacy.html
+	uri path_regexp ^/(.+)/$ /$1
+	try_files {path} {path}.html
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Frame-Options DENY
+		Content-Security-Policy "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; connect-src 'self'; frame-ancestors 'none'"
+		-Server
+	}
+	@html path *.html /
+	header @html Cache-Control "public, max-age=300"
+	@assets path /styles.css /i18n.js /assets/* /i18n/*
+	header @assets Cache-Control "public, max-age=3600"
+
+	handle_errors {
+		respond "{err.status_code} {err.status_text}" {err.status_code}
+	}
+	file_server
+}
