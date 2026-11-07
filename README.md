@@ -19,3 +19,19 @@ docker build -t bb-site . && docker run -p 8080:8080 -e PORT=8080 bb-site
 3. Run `npm run check:i18n`; it fails when a key is missing from any file or unknown in the HTML.
 
 Keys are named `<page>.<section>.<n>` for paragraphs and `<page>.<section>.title` for headings.
+
+## Deployment
+
+- **Railway** project `bb-system-public`, one service built from this repository's `Dockerfile` (see `railway.toml`). Every push to `main` redeploys.
+- **Domain** `https://bbgym.app`; `www.bbgym.app` redirects to it (Caddyfile). DNS lives in Cloudflare, zone `bbgym.app`: proxied CNAME records for `@` and `www` pointing at the Railway service, SSL/TLS mode Full.
+- **Integration tests** against any deployment: `SITE_URL=https://bbgym.app npm test`.
+
+### URLs for App Store Connect and Google Play
+
+| Field | URL |
+|---|---|
+| Marketing URL | `https://bbgym.app/` |
+| Privacy Policy URL | `https://bbgym.app/privacy` |
+| Support URL | `https://bbgym.app/support` |
+
+The privacy page also names each health data type the apps read (Apple Health on iOS, Health Connect on Android), as Google Play's Health Connect policy requires.
